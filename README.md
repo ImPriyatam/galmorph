@@ -1,4 +1,5 @@
 # galmorph
+<<<<<<< HEAD
 **galmorph** is a Python package for classifying simulated galaxies into elliptical, spiral or irregular types based on the morphology present in the simulation.
 
 This tool is designed to work with `.pkl` files containing specific probability columns and enables basic classification, filtering, and visualization of galaxy morphologies.
@@ -39,3 +40,7 @@ To follow the steps see "here"
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE](./LICENSE) file for details.
+=======
+
+Python package to classify Galaxies based on the morphology in simulation
+>>>>>>> refs/remotes/origin/main
