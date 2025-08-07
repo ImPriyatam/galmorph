@@ -25,6 +25,10 @@ The input should be a **Pickle file (`.pkl`)** that can be loaded as a Pandas Da
 
 ---
 
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](./LICENSE) file for details.
+
 ## Installation
 
 ```bash
@@ -33,6 +37,3 @@ cd GalaxyMorphoClassifier
 pip install .
 
 To follow the steps see "here"
-## License
-
-This project is licensed under the MIT License - see the [LICENSE](./LICENSE) file for details.
