@@ -8,16 +8,14 @@ class GalMorph:
     def __init__(self, file_path):
         self.data = pd.read_pickle(file_path)
 
-    def _assign_galaxy_type(self, row) -> str:
+    def _assign_galaxy_type(self, row, thresholds:dict={
+    'elliptical': 0.7,'spiral': 0.6,'irregular': 0.5}) -> str:
         """
         Assigns a galaxy type based on the highest value among three input columns.
 
         Parameters:
-            row (pd.Series): A row from a DataFrame.
-            col_elliptical (str): Column name for elliptical score/value.
-            col_spiral (str): Column name for spiral score/value.
-            col_irregular (str): Column name for irregular score/value.
-
+            row (pd.Series): A row from a DataFrame, containing columns "P_Spheroid", "P_Disk", & "P_Irr"
+            thresholds (dict): Dictionary of critical values, e.g., {'elliptical': 0.7, 'spiral': 0.6, 'irregular': 0.5}
         Returns:
             str: 'elliptical', 'spiral', or 'irregular' depending on which value is highest.
         """
@@ -26,7 +24,13 @@ class GalMorph:
             'spiral': row["P_Disk"],
             'irregular': row["P_Irr"]
         }
-        return max(values, key=values.get)
+        max_type = max(values, key=values.get)
+        max_value = values[max_type]
+        
+        if max_value >= thresholds[max_type]:
+            return max_type
+        else:
+            return 'unknown'
 
     def Galaxy_count(self, file_name="galaxy_count.png"):
         # print("Running inside the count.....")
@@ -58,15 +62,24 @@ class GalMorph:
         for gal_type in snapshot_galaxy["Galaxy_type"].drop_duplicates().values:
             galaxy_type_count_dict[gal_type] = snapshot_galaxy[snapshot_galaxy["Galaxy_type"] == gal_type].shape[0]
 
-        plt.figure(figsize=[6, 4])
-        plt.title(f"Galaxy Type Count of Snapshot {snapshot_num}")
-        plt.bar(list(galaxy_type_count_dict.keys()), list(galaxy_type_count_dict.values()))
-        plt.ylabel("Number")
-        plt.xlabel("Galaxy Type")
-        plt.savefig(f"{output_fname}")
+        bar_colors = ['red', 'green', 'blue', 'purple']
+        fig, ax = plt.subplots()
+        ax.set_ylim(1, 1000)
+        # Create the bars and store the BarContainer object
+        bars = ax.bar(list(galaxy_type_count_dict.keys()), list(galaxy_type_count_dict.values()), color = bar_colors, width = 0.5)
+        # Add labels to the bars
+        ax.bar_label(bars, label_type='edge', padding=2, color='black', fontsize=10)
+        ax.set_title(f"Galaxy Type Count of Snapshot {snapshot_num}")
+        ax.set_ylabel(r"Number $\longrightarrow$")
+        ax.set_xlabel("Galaxy Type")
+        ax.tick_params(axis='y', which = 'major', length = 10, direction = "in")
+        ax.tick_params(axis='y', which = 'minor', length = 5, direction = "in")
+        ax.set_yscale('log')
+        print(ax.get_ylim())
+        plt.savefig(f"{output_fname}", dpi = 200)
         plt.show()
 
 
 if __name__ == "__main__":
-    GalSim = GalMorph(file_path="data/morphologies_snapshot_data.pkl")
+    GalSim = GalMorph(file_path="galmorph/data/morphologies_snapshot_data.pkl")
     GalSim.Galaxy_type_snap()
