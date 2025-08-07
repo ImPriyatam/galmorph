@@ -57,7 +57,7 @@ class GalMorph:
         snapshot_galaxy = self.data[self.data["Snapshot"]==snapshot_num].reset_index()
 
         galaxy_type_count_dict = {}
-        print(snapshot_galaxy["Galaxy_type"].drop_duplicates().values)
+        # print(snapshot_galaxy["Galaxy_type"].drop_duplicates().values)
 
         for gal_type in snapshot_galaxy["Galaxy_type"].drop_duplicates().values:
             galaxy_type_count_dict[gal_type] = snapshot_galaxy[snapshot_galaxy["Galaxy_type"] == gal_type].shape[0]
