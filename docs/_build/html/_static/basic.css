@@ -211,7 +211,11 @@ table.modindextable td {
 /* -- general body styles --------------------------------------------------- */
 
 div.body {
+<<<<<<< HEAD
+    min-width: inherit;
+=======
     min-width: 360px;
+>>>>>>> refs/remotes/origin/main
     max-width: 800px;
 }
 
