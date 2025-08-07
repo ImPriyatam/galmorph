@@ -1,0 +1,169 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Galaxy morphology estimator function &mdash; GalMorph v0.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=34cd777e"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            GalMorph
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <!-- Local TOC -->
+              <div class="local-toc"><ul>
+<li><a class="reference internal" href="#">Galaxy morphology estimator function</a><ul>
+<li><a class="reference internal" href="#core.GalMorph"><code class="docutils literal notranslate"><span class="pre">GalMorph</span></code></a><ul>
+<li><a class="reference internal" href="#core.GalMorph.data"><code class="docutils literal notranslate"><span class="pre">GalMorph.data</span></code></a></li>
+<li><a class="reference internal" href="#core.GalMorph.snapshot_values"><code class="docutils literal notranslate"><span class="pre">GalMorph.snapshot_values</span></code></a></li>
+<li><a class="reference internal" href="#core.GalMorph.Galaxy_count"><code class="docutils literal notranslate"><span class="pre">GalMorph.Galaxy_count()</span></code></a></li>
+<li><a class="reference internal" href="#core.GalMorph.Galaxy_type_snap"><code class="docutils literal notranslate"><span class="pre">GalMorph.Galaxy_type_snap()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">GalMorph</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Galaxy morphology estimator function</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/core.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="galaxy-morphology-estimator-function">
+<span id="core"></span><h1>Galaxy morphology estimator function<a class="headerlink" href="#galaxy-morphology-estimator-function" title="Link to this heading"></a></h1>
+<p>Welcome to the GalMorph documentation page!</p>
+<p>GalMorph is a neat little function that morphologically categorizes galaxies from a numerical simulation dataset as spiral, elliptical or irregular.</p>
+<p>The package analyzes the probability values for the three morphologies to decide the type of each simulated galaxy.</p>
+<dl class="py class" id="module-core">
+<dt class="sig sig-object py" id="core.GalMorph">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">core.</span></span><span class="sig-name descname"><span class="pre">GalMorph</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file_path</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#core.GalMorph" title="Link to this definition"></a></dt>
+<dd><p>A class for analyzing and visualizing galaxy morphology data.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="core.GalMorph.data">
+<span class="sig-name descname"><span class="pre">data</span></span><a class="headerlink" href="#core.GalMorph.data" title="Link to this definition"></a></dt>
+<dd><p>DataFrame containing galaxy morphology data loaded from a pickle file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>pd.DataFrame</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="core.GalMorph.snapshot_values">
+<span class="sig-name descname"><span class="pre">snapshot_values</span></span><a class="headerlink" href="#core.GalMorph.snapshot_values" title="Link to this definition"></a></dt>
+<dd><p>List of unique snapshot values in the data.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="core.GalMorph.Galaxy_count">
+<span class="sig-name descname"><span class="pre">Galaxy_count</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file_name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'galaxy_count.png'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#core.GalMorph.Galaxy_count" title="Link to this definition"></a></dt>
+<dd><p>Plots the number of galaxies for each snapshot and saves the plot as an image.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>file_name</strong> (<em>str</em>) – Name of the output image file for the plot. Default is “galaxy_count.png”.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="core.GalMorph.Galaxy_type_snap">
+<span class="sig-name descname"><span class="pre">Galaxy_type_snap</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">snapshot_num</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">25</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_fname</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'bar.png'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#core.GalMorph.Galaxy_type_snap" title="Link to this definition"></a></dt>
+<dd><p>Plots a bar chart of galaxy type counts for a specific snapshot and saves the plot as an image.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>snapshot_num</strong> (<em>int</em>) – The snapshot number to analyze. Default is 25.</p></li>
+<li><p><strong>output_fname</strong> (<em>str</em>) – Name of the output image file for the plot. Default is “bar.png”.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Priyatam Kumar, Shahd Moghazy and Mitali Damle.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

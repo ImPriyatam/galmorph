@@ -1,8 +1,4 @@
 # Sphinx build info version 1
 # This file records the configuration used when building these files. When it is not found, a full rebuild will be done.
-<<<<<<< HEAD
-config: da8fc409e6647ee79293e6fdf9aa3558
-=======
-config: e301b62ec1b1aead22bd92c7456bcd5c
->>>>>>> refs/remotes/origin/main
+config: f2f38732e71f5ba94f5a73efea6be5a6
 tags: 645f666f9bcd5a90fca523b33c5a78b7
