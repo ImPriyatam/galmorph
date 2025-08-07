@@ -24,16 +24,18 @@ The input should be a **Pickle file (`.pkl`)** that can be loaded as a Pandas Da
 - Each probability should be a float between `0` and `1`.
 
 ---
-
-## License
-
-This project is licensed under the MIT License - see the [LICENSE](./LICENSE) file for details.
-
 ## Installation
 
 ```bash
 git clone https://github.com/ImPriyatam/galmorph.git
-cd GalaxyMorphoClassifier
+cd galmorph
 pip install .
+```
 
 To follow the steps see "here"
+
+---
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](./LICENSE) file for details.
