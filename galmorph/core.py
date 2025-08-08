@@ -1,5 +1,7 @@
 import pandas as pd
 import matplotlib.pyplot as plt
+import os
+
 
 class GalMorph:
     """
@@ -18,10 +20,13 @@ class GalMorph:
     def __init__(self, file_path):
         """
         Initializes the GalMorph object by loading data from a pickle file.
-
-        
         """
-        self.data = pd.read_pickle(file_path)
+        if not os.path.exists(file_path):
+            raise FileNotFoundError(f"File '{file_path}' does not exist.")
+        try:
+            self.data = pd.read_pickle(file_path)
+        except Exception as e:
+            raise pd.errors.EmptyDataError(f"Could not load pickle file '{file_path}': {e}")
 
     def _assign_galaxy_type(self, row, thresholds:dict={
     'elliptical': 0.7,'spiral': 0.6,'irregular': 0.5}) -> str:
@@ -35,11 +40,14 @@ class GalMorph:
             str: 'elliptical', 'spiral', or 'irregular' depending on which value is highest.
         
         """
-        values = {
-            'elliptical': row["P_Spheroid"],
-            'spiral': row["P_Disk"],
-            'irregular': row["P_Irr"]
-        }
+        try:
+            values = {
+                'elliptical': row["P_Spheroid"],
+                'spiral': row["P_Disk"],
+                'irregular': row["P_Irr"]
+            }
+        except KeyError as e:
+            raise KeyError(f"Missing expected column in row: {e}")
         max_type = max(values, key=values.get)
         max_value = values[max_type]
         
@@ -56,6 +64,8 @@ class GalMorph:
             file_name (str): Name of the output image file for the plot. Default is "galaxy_count.png".
         
         """
+        if "Snapshot" not in self.data.columns:
+            raise ValueError("Column 'Snapshot' not found in data.")
         self.snapshot_values = self.data["Snapshot"].drop_duplicates().to_list()
         galaxies_count = []
         for val in self.snapshot_values:
@@ -67,7 +77,10 @@ class GalMorph:
         plt.minorticks_on()
         plt.xlabel("Snapshot")
         plt.ylabel("Galaxy Count")
-        plt.savefig(f"{file_name}", dpi = 130)
+        try:
+            plt.savefig(f"{file_name}", dpi = 130)
+        except Exception as e:
+            print(f"Error saving plot to '{file_name}': {e}")
         plt.show()
 
     def Galaxy_type_snap(self, snapshot_num:int=25, output_fname = "bar.png"):
@@ -90,13 +103,26 @@ class GalMorph:
              -The bars are colored differently for each type.
         
         """
+        required_cols = {"P_Spheroid", "P_Disk", "P_Irr", "Snapshot", "SubhaloID"}
+        missing_cols = required_cols - set(self.data.columns)
+        if missing_cols:
+            raise ValueError(f"Missing columns in data: {missing_cols}")
+
+        available_snapshots = self.data["Snapshot"].unique()
+        # Convert to plain Python ints for display
+        available_snapshots_list = sorted([int(s) for s in available_snapshots])
+        if snapshot_num not in available_snapshots:
+            raise ValueError(
+                f"Snapshot {snapshot_num} not found in data. "
+                f"Available snapshots are: {available_snapshots_list}")
+
         self.data["Galaxy_type"] = self.data.apply(self._assign_galaxy_type, axis=1)
         snapshot_galaxy = self.data[self.data["Snapshot"]==snapshot_num].reset_index()
 
-        
+        if snapshot_galaxy.empty:
+            raise ValueError(f"No data found for snapshot {snapshot_num}.")
+
         # Create a dictionary to count the number of galaxies of each type in the snapshot.
-        
-    
         galaxy_type_count_dict = {}
         for gal_type in snapshot_galaxy["Galaxy_type"].drop_duplicates().values:
             galaxy_type_count_dict[gal_type] = snapshot_galaxy[snapshot_galaxy["Galaxy_type"] == gal_type].shape[0]
@@ -113,8 +139,11 @@ class GalMorph:
         ax.tick_params(axis='y', which = 'major', length = 10, direction = "in")
         ax.tick_params(axis='y', which = 'minor', length = 5, direction = "in")
         ax.set_yscale('log')
-        print(ax.get_ylim())
-        plt.savefig(f"{output_fname}", dpi = 200)
+        try:
+            file_name = "Snap_" + str(snapshot_num) + "_" + output_fname
+            plt.savefig(file_name, dpi = 200)
+        except Exception as e:
+            print(f"Error saving plot to '{output_fname}': {e}")
         plt.show()
 
 
@@ -125,4 +154,4 @@ if __name__ == "__main__":
     
     """
     GalSim = GalMorph(file_path="data/morphologies_snapshot_data.pkl")
-    GalSim.Galaxy_type_snap()
+    GalSim.Galaxy_type_snap(snapshot_num=34)
