@@ -45,3 +45,5 @@ This project is licensed under the MIT License - see the [LICENSE](./LICENSE) fi
 
 
 [def]: docs/_build/html/index.html
+
+[![PyPI version](https://badge.fury.io/py/galmorph.svg)](https://pypi.org/project/galmorph/)
