@@ -7,14 +7,19 @@ class GalMorph:
 
     Attributes:
         data (pd.DataFrame): DataFrame containing galaxy morphology data loaded from a pickle file.
+    Parameters: 
+            file_path (str): Path to the pickle file containing galaxy morphology data.
+            snapshot_values (list): List of unique snapshot values from the data.
+            galaxies_count (list): List of counts of galaxies for each snapshot.
+            galaxy_type_count_dict (dict): Dictionary to count the number of galaxies of each type in a snapshot.
+        
     """
 
     def __init__(self, file_path):
         """
         Initializes the GalMorph object by loading data from a pickle file.
 
-        Parameters:
-            file_path (str): Path to the pickle file containing galaxy morphology data.
+        
         """
         self.data = pd.read_pickle(file_path)
 
@@ -28,6 +33,7 @@ class GalMorph:
             thresholds (dict): Dictionary of critical values, e.g., {'elliptical': 0.7, 'spiral': 0.6, 'irregular': 0.5}
         Returns:
             str: 'elliptical', 'spiral', or 'irregular' depending on which value is highest.
+        
         """
         values = {
             'elliptical': row["P_Spheroid"],
@@ -48,6 +54,7 @@ class GalMorph:
 
         Parameters:
             file_name (str): Name of the output image file for the plot. Default is "galaxy_count.png".
+        
         """
         self.snapshot_values = self.data["Snapshot"].drop_duplicates().to_list()
         galaxies_count = []
@@ -73,22 +80,28 @@ class GalMorph:
 
         Returns:
             None: The function saves the plot as an image file.
+       
+         Note:
+            This creates a bar plot to visualize the counts of each galaxy type.
+             -The x-axis represents the galaxy types, and the y-axis represents the counts.
+
+             -The y-axis is set to a logarithmic scale for better visibility of differences.
+             
+             -The bars are colored differently for each type.
+        
         """
         self.data["Galaxy_type"] = self.data.apply(self._assign_galaxy_type, axis=1)
         snapshot_galaxy = self.data[self.data["Snapshot"]==snapshot_num].reset_index()
 
-        """
-        Create a dictionary to count the number of galaxies of each type in the snapshot.
-        """
+        
+        # Create a dictionary to count the number of galaxies of each type in the snapshot.
+        
+    
         galaxy_type_count_dict = {}
         for gal_type in snapshot_galaxy["Galaxy_type"].drop_duplicates().values:
             galaxy_type_count_dict[gal_type] = snapshot_galaxy[snapshot_galaxy["Galaxy_type"] == gal_type].shape[0]
-        """
-        Create a bar plot to visualize the counts of each galaxy type.
-        The x-axis represents the galaxy types, and the y-axis represents the counts.
-        The y-axis is set to a logarithmic scale for better visibility of differences.
-        The bars are colored differently for each type.
-        """
+        
+
         bar_colors = ['red', 'green', 'blue', 'purple']
         fig, ax = plt.subplots()
         ax.set_ylim(1, 1000)
@@ -109,6 +122,7 @@ if __name__ == "__main__":
     """
     Example usage of the GalMorph class.
     Loads galaxy morphology data and generates a bar plot for a specific snapshot.
+    
     """
     GalSim = GalMorph(file_path="data/morphologies_snapshot_data.pkl")
     GalSim.Galaxy_type_snap()
