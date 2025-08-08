@@ -1,6 +1,6 @@
 # GalMorph
 
-**GalMorph** is a Python package for classifying simulated galaxies into elliptical, spiral, irregular or irregular based on their morphology probability in the TNG simulation ([TNG Project](https://www.tng-project.org/)).  
+**GalMorph** is a Python package for classifying simulated galaxies into elliptical, spiral, or irregular based on their morphology probability in the TNG simulation ([TNG Project](https://www.tng-project.org/)).  
 
 This tool is designed to work with `.pkl` files containing specific probability columns and enables basic classification, filtering, and visualization of galaxy morphologies.
 
@@ -32,8 +32,8 @@ git clone https://github.com/ImPriyatam/galmorph.git
 cd galmorph
 pip install .
 ```
+To follow the steps, see the documentation [here](https://ImPriyatam.github.io/galmorph/).
 
-To follow the steps, see [here](https://ImPriyatam.github.io/galmorph/).
 > _(If you're working locally, you can also open `docs/_build/html/index.html` in your browser.)_
 
 
@@ -42,3 +42,6 @@ To follow the steps, see [here](https://ImPriyatam.github.io/galmorph/).
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE](./LICENSE) file for details.
+
+
+[def]: docs/_build/html/index.html
