@@ -32,6 +32,12 @@ git clone https://github.com/ImPriyatam/galmorph.git
 cd galmorph
 pip install .
 ```
+Or you can install galmorph directly from PyPI:
+
+```bash
+pip install galmorph
+```
+
 To follow the steps, see the documentation [here](https://ImPriyatam.github.io/galmorph/).
 
 > _(If you're working locally, you can also open `docs/_build/html/index.html` in your browser.)_
