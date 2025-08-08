@@ -5,7 +5,7 @@
 
 import os
 import sys
-sys.path.insert(0, os.path.abspath('../galmorph/'))
+sys.path.insert(0, os.path.abspath('../galmorph'))
 
 # -- Project information -----------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
@@ -23,11 +23,19 @@ release = '0.1'
 extensions = ['sphinx.ext.autodoc','sphinx.ext.napoleon','myst_parser','sphinx.ext.autosummary']
 source_suffix = ['.rst', '.md'] 
 
+napoleon_google_docstring = True
+napoleon_numpy_docstring = True
+
 autosummary_generate = True  # Turn on sphinx.ext.autosummary
 
 templates_path = ['_templates']
 exclude_patterns = ['_build', 'Thumbs.db', '.DS_Store']
 
+autodoc_default_options = {
+    'members': True,
+    'undoc-members': True,
+    'private-members': True,  # This line is important
+}
 
 
 # -- Options for HTML output -------------------------------------------------

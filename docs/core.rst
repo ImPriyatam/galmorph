@@ -7,5 +7,10 @@ Our primary package, GalMorph, consists of a number of modules, each carrying ou
 
 We describe all the modules in detail below.
 
-.. automodule:: core
+.. automodule:: galmorph.core
    :members:
+   :private-members:
+   :undoc-members:
+   :show-inheritance:
+   :special-members: __init__
+
