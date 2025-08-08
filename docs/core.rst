@@ -1,6 +1,6 @@
 .. _core:
 
-Galaxy morphology estimator function
+Galaxy Morphology Estimator Function
 =====================
 
 Welcome to the GalMorph documentation page! 
