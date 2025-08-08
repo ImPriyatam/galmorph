@@ -81,7 +81,7 @@ class GalMorph:
         else:
             return 'unknown'
 
-    def galaxy_count(self, file_name: str = "galaxy_count.png", show: bool = True) -> plt.Figure:
+    def galaxy_count(self, file_name: str = "galaxy_count.png", show: bool = False) -> plt.Figure:
         """
         Plots the number of galaxies for each snapshot and saves the plot as an image.
 
@@ -114,8 +114,8 @@ class GalMorph:
     def galaxy_type_snap(
         self,
         snapshot_num: int = 25,
-        output_fname: str = "bar.png",
-        show: bool = True
+        output_fname: str = "GalCount.png",
+        show: bool = False
     ) -> plt.Figure:
         """
         Plots a bar chart of galaxy type counts for a specific snapshot and saves the plot as an image.
@@ -143,8 +143,10 @@ class GalMorph:
             raise ValueError(f"No data found for snapshot {snapshot_num}.")
 
         galaxy_type_counts = snapshot_galaxy["Galaxy_type"].value_counts().to_dict()
+        galaxy_type_counts = dict(sorted(galaxy_type_counts.items()))
 
-        from matplotlib import colormaps  # New recommended way
+
+        from matplotlib import colormaps 
 
         # Get the tab10 colormap
         color_cycle = colormaps['tab10']
@@ -163,7 +165,7 @@ class GalMorph:
         )
         ax.bar_label(bars, label_type='edge', padding=2, color='black', fontsize=10)
         ax.set_title(f"Galaxy Type Count of Snapshot {snapshot_num}")
-        ax.set_ylabel("Number")
+        ax.set_ylabel(r"Number $\longrightarrow$")
         ax.set_xlabel("Galaxy Type")
         ax.tick_params(axis='y', which='major', length=10, direction="in")
         ax.tick_params(axis='y', which='minor', length=5, direction="in")
