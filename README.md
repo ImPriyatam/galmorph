@@ -32,7 +32,9 @@ cd galmorph
 pip install .
 ```
 
-To follow the steps see "here"
+To follow the steps, see [here](https://ImPriyatam.github.io/galmorph/).
+> _(If you're working locally, you can also open `docs/_build/html/index.html` in your browser.)_
+
 
 ---
 
