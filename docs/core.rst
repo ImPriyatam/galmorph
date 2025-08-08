@@ -3,11 +3,9 @@
 Galaxy morphology estimator function
 =====================
 
-Welcome to the GalMorph documentation page! 
+Our primary package, GalMorph, consists of a number of modules, each carrying out a specific role in order to ultimately categorize a set of input galaxies.
 
-GalMorph is a neat little function that morphologically categorizes galaxies from a numerical simulation dataset as spiral, elliptical or irregular. 
-
-The package analyzes the probability values for the three morphologies to decide the type of each simulated galaxy.
+We describe all the modules in detail below.
 
 .. automodule:: core
    :members:
