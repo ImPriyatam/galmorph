@@ -53,3 +53,6 @@ This project is licensed under the MIT License - see the [LICENSE](./LICENSE) fi
 [def]: docs/_build/html/index.html
 
 [![PyPI version](https://badge.fury.io/py/galmorph.svg)](https://pypi.org/project/galmorph/)
+
+[![A rectangular badge, half black half purple containing the text made at Code Astro](https://img.shields.io/badge/Made%20at-Code/Astro-blueviolet.svg)](https://semaphorep.github.io/codeastro/)
+
